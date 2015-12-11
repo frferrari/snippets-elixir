@@ -1,6 +1,6 @@
 # snippets-elixir
 #
-# Here are some examples of code that show how to access an ElasticSearch db using the Tirexs library
+# Here are some examples of Elixir code that show how to access an ElasticSearch db using the Tirexs library
 #
 defmodule ElasticSearch do
   require Tirexs.ElasticSearch
