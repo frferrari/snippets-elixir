@@ -28,7 +28,7 @@ defmodule ElasticSearch.Auctions do
   @doc "Get a count of all documents in the auctions index"
   def get_count(settings \\ ElasticSearch.get_settings) do
     {:ok, 200, %{_shards: _, count: cnt}} = Tirexs.Manage.count([index: @auctions_index], settings)
-    cnt
+    {:ok, cnt}
   end
 
   @doc "Delete the auctions index"
@@ -49,6 +49,6 @@ defmodule ElasticSearch.Auctions do
       end
     end
     {:result, count, _, _, results, _} = Tirexs.Query.create_resource(find_auctions, settings, [{:from, offset}, {:size, page_size}])
-    {count, results |> Enum.map(fn(%{_id: _, _index: _, _score: _, _source: auctions, _type: _, sort: _}) -> auctions end)}
+    {:ok, count, results |> Enum.map(fn(%{_id: _, _index: _, _score: _, _source: auctions, _type: _, sort: _}) -> auctions end)}
   end
 end
